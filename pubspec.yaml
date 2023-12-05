@@ -19,6 +19,8 @@ dependencies:
   cloud_firestore: ^4.8.5
   firebase_storage: ^11.2.6
   image_picker: ^1.0.2
+  video_player: ^2.8.1
+  video_compress: ^3.1.2
 
 
 dev_dependencies:
