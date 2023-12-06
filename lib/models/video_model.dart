@@ -44,17 +44,17 @@ class Video {
   static Video fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
     return Video(
-      userName: userName,
-      uid: uid,
-      id: id,
-      likes: likes,
-      commentCount: commentCount,
-      shareCount: shareCount,
-      songName: songName,
-      caption: caption,
-      videoUrl: videoUrl,
-      thumbnail: thumbnail,
-      profilePhoto: profilePhoto,
+      userName: snapshot["userName"],
+      uid: snapshot["uid"],
+      id: snapshot["id"],
+      likes: snapshot["likes"],
+      commentCount: snapshot["commentCount"],
+      shareCount: snapshot["shareCount"],
+      songName: snapshot["songName"],
+      caption: snapshot["caption"],
+      videoUrl: snapshot["videoUrl"],
+      thumbnail: snapshot["thumbnail"],
+      profilePhoto: snapshot["profilePhoto"],
     );
   }
 }
