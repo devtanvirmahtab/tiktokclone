@@ -39,6 +39,14 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    uploadVideoController.dispose();
+    songController.dispose();
+    captionController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(

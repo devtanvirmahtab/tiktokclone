@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:tiktokclone/models/video_model.dart';
+import 'package:tiktokclone/utilies/constants/app_constants.dart';
 import 'package:tiktokclone/utilies/constants/firebase_constants.dart';
 import 'package:video_compress/video_compress.dart';
 
@@ -54,8 +55,10 @@ class UploadVideoController extends GetxController {
       String thumbnail =
           await _uploadImageToStorage('Video $length', videoPath);
 
+      logger.d('after upload $videoUrl $thumbnail');
+
       Video video = Video(
-        userName: (userDoc.data() as Map<String, dynamic>)['name'],
+        userName: (userDoc.data() as Map<String, dynamic>)['name'] ?? "",
         uid: uid,
         id: "Video $length",
         likes: [],
@@ -65,9 +68,10 @@ class UploadVideoController extends GetxController {
         caption: caption,
         videoUrl: videoUrl,
         thumbnail: thumbnail,
-        profilePhoto: (userDoc.data() as Map<String, dynamic>)['profilePhoto'],
+        profilePhoto: (userDoc.data() as Map<String, dynamic>)['profilePhoto']??"",
       );
 
+      logger.d("video $video");
       await fireStore
           .collection('videos')
           .doc('Video $length')

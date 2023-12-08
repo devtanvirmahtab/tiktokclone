@@ -1,14 +1,16 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../views/screens/home/add_video_screen.dart';
+import '../views/screens/home/video_screen.dart';
 
 const pageList = [
-    Text("Home"),
-    Text("Search"),
-    AddVideoScreen(),
-    Text("Messages"),
-    Text("Profile"),
+  VideoScreen(),
+  Text("Search"),
+  AddVideoScreen(),
+  Text("Messages"),
+  Text("Profile"),
 ];
 
 ImageProvider getCallProfileImage(String? imageUrl) {
