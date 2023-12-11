@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tiktokclone/utilies/constants/firebase_constants.dart';
 
 import '../models/video_model.dart';
+import '../utilies/constants/controller_constants.dart';
 
 class VideoController extends GetxController {
   final Rx<List<Video>> _videoList = Rx<List<Video>>([]);
@@ -27,8 +28,15 @@ class VideoController extends GetxController {
 
   likeVideo(String id) async {
    DocumentSnapshot doc =  await fireStore.collection('videos').doc(id).get();
-   if(doc.data()! as dynamic){
-
+   var uid = authController.user.uid;
+   if((doc.data()! as dynamic)['likes'].contains(uid)){
+     await fireStore.collection('videos').doc(id).update({
+       'likes': FieldValue.arrayRemove([uid]),
+     });
+   }else{
+     await fireStore.collection('videos').doc(id).update({
+       'likes': FieldValue.arrayUnion([uid]),
+     });
    }
   }
 }

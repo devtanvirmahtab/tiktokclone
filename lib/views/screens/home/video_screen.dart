@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktokclone/controllers/video_controller.dart';
+import 'package:tiktokclone/utilies/constants/controller_constants.dart';
+import 'package:tiktokclone/views/screens/home/comment_screen.dart';
 
 import '../../widgets/circle_animation.dart';
 import '../../widgets/video_player_item.dart';
@@ -84,7 +86,7 @@ class _VideoScreenState extends State<VideoScreen> {
     return Scaffold(
       body: Obx(() {
         return PageView.builder(
-          itemCount:videoController.videoList.length,
+          itemCount: videoController.videoList.length,
           controller: PageController(
             initialPage: 0,
             viewportFraction: 1,
@@ -94,7 +96,7 @@ class _VideoScreenState extends State<VideoScreen> {
             final data = videoController.videoList[index];
             return Stack(
               children: [
-                VideoPlayerItem(videoUrl:data.videoUrl),
+                VideoPlayerItem(videoUrl: data.videoUrl),
                 Column(
                   children: [
                     const SizedBox(height: 100),
@@ -110,8 +112,8 @@ class _VideoScreenState extends State<VideoScreen> {
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -157,10 +159,15 @@ class _VideoScreenState extends State<VideoScreen> {
                                 buildProfile(data.profilePhoto),
                                 Column(
                                   children: [
-                                    const InkWell(
+                                    InkWell(
+                                      onTap: () =>
+                                          videoController.likeVideo(data.id),
                                       child: Icon(
                                         Icons.favorite,
-                                        color: Colors.red,
+                                        color: data.likes.contains(
+                                                authController.user.uid)
+                                            ? Colors.red
+                                            : Colors.white,
                                       ),
                                     ),
                                     const SizedBox(height: 7),
@@ -175,7 +182,8 @@ class _VideoScreenState extends State<VideoScreen> {
                                 ),
                                 Column(
                                   children: [
-                                    const InkWell(
+                                     InkWell(
+                                       onTap: ()=> Get.to(CommentScreen()),
                                       child: Icon(
                                         Icons.message,
                                         color: Colors.white,

@@ -14,6 +14,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
   final imagePath = "".obs;
+  User get user => _user.value!;
 
   @override
   void onReady(){
