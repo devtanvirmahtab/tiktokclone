@@ -13,9 +13,9 @@ class CommentController extends GetxController{
     _postId = id;
   }
 
-  getComment()async{
-
-  }
+  // getComment()async{
+  //
+  // }
 
   postComment(String commentText) async {
     if(commentText.isNotEmpty){
