@@ -5,7 +5,9 @@ class CommentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -96,7 +98,7 @@ class CommentScreen extends StatelessWidget {
                   ),
                 ),
                 trailing: TextButton(
-                  onPressed: () { },
+                  onPressed: () {},
                   child: const Text(
                     'Send',
                     style: TextStyle(

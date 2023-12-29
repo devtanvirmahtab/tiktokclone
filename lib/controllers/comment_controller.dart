@@ -5,22 +5,29 @@ import 'package:tiktokclone/utilies/constants/firebase_constants.dart';
 
 import '../models/comment_model.dart';
 
-class CommentController extends GetxController{
+class CommentController extends GetxController {
   final Rx<List<Comment>> _comment = Rx<List<Comment>>([]);
+
   List<Comment> get comments => _comment.value;
-  String _postId  = "";
-  updatePostId(String id){
+  String _postId = "";
+
+  updatePostId(String id) {
     _postId = id;
   }
 
-  // getComment()async{
-  //
-  // }
-
   postComment(String commentText) async {
-    if(commentText.isNotEmpty){
-      DocumentSnapshot userDoc = await fireStore.collection('users').doc(authController.user.uid).get();
-      var allDocs = await fireStore.collection('videos').doc(_postId).collection('comments').get();
+    if (commentText.isNotEmpty) {
+      DocumentSnapshot userDoc = await fireStore.collection('users').doc(
+          authController.user.uid).get();
+      var allDocs = await fireStore.collection('videos')
+          .doc(_postId)
+          .collection('comments')
+          .get();
     }
   }
+
+// getComment()async{
+//
+// }
+
 }
