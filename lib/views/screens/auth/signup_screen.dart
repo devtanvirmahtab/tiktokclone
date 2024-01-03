@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tiktokclone/controllers/auth_controller.dart';
 import 'package:tiktokclone/views/screens/auth/login_screen.dart';
 
 import '../../../utilies/constants/app_constants.dart';
@@ -42,18 +41,18 @@ class SignupScreen extends StatelessWidget {
                 Obx(<AuthController>() {
                   return CircleAvatar(
                     radius: 55,
-                    backgroundImage: getProfileImage(
-                        authController.imagePath.value, ""),
+                    backgroundImage:
+                        getProfileImage(authController.imagePath.value, ""),
                   );
                 }),
                 Positioned(
                   bottom: 10,
                   right: 0,
                   child: GestureDetector(
-                    onTap: () {
-                      authController.pickImage();
-                    },
-                    child: Container(
+                      onTap: () {
+                        authController.pickImage();
+                      },
+                      child: Container(
                         width: 35,
                         height: 35,
                         padding: mainPaddingAll(scale: 0.3),
@@ -66,8 +65,7 @@ class SignupScreen extends StatelessWidget {
                           Icons.camera_alt,
                           color: grayColor,
                         ),
-                      )
-                  ),
+                      )),
                 )
               ],
             ),
@@ -113,8 +111,7 @@ class SignupScreen extends StatelessWidget {
                     userNameController.text,
                     emailController.text,
                     passwordController.text,
-                     File(authController.imagePath.value),
-
+                    File(authController.imagePath.value),
                   );
                 },
                 child: Center(
