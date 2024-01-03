@@ -60,7 +60,9 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
               width: Get.width,
               child: VideoPlayer(controller),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -73,7 +75,9 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       icon: Icons.music_note,
                     ),
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     width: Get.width - 20,
@@ -83,9 +87,14 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       icon: Icons.message_outlined,
                     ),
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   ElevatedButton(
-                    onPressed: () => uploadVideoController.uploadVideo(songController.text, captionController.text, widget.videoPath),
+                    onPressed: () => uploadVideoController.uploadVideo(
+                        songController.text,
+                        captionController.text,
+                        widget.videoPath),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),
