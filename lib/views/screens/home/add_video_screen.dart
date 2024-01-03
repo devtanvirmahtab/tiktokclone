@@ -23,55 +23,56 @@ class AddVideoScreen extends StatelessWidget {
   showOptionDialog(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (context) => SimpleDialog(
-        children: [
-          SimpleDialogOption(
-            onPressed: () => pickVideo(ImageSource.gallery),
-            child: const Row(
-              children: [
-                Icon(Icons.image),
-                SizedBox(width: 10),
-                Text(
-                  "Gallery",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+      builder: (context) =>
+          SimpleDialog(
+            children: [
+              SimpleDialogOption(
+                onPressed: () => pickVideo(ImageSource.gallery),
+                child: const Row(
+                  children: [
+                    Icon(Icons.image),
+                    SizedBox(width: 10),
+                    Text(
+                      "Gallery",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              SimpleDialogOption(
+                onPressed: () => pickVideo(ImageSource.camera),
+                child: const Row(
+                  children: [
+                    Icon(Icons.camera_alt),
+                    SizedBox(width: 10),
+                    Text(
+                      "Camera",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Get.back(),
+                child: const Row(
+                  children: [
+                    Icon(Icons.cancel),
+                    SizedBox(width: 10),
+                    Text(
+                      "Cancel",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-          SimpleDialogOption(
-            onPressed: () => pickVideo(ImageSource.camera),
-            child: const Row(
-              children: [
-                Icon(Icons.camera_alt),
-                SizedBox(width: 10),
-                Text(
-                  "Camera",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                )
-              ],
-            ),
-          ),
-          SimpleDialogOption(
-            onPressed: () => Get.back(),
-            child: const Row(
-              children: [
-                Icon(Icons.cancel),
-                SizedBox(width: 10),
-                Text(
-                  "Cancel",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 

@@ -19,17 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Center(child: pageList[pageIndex]),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (value){
+        onTap: (value) {
           pageIndex = value;
-          setState(() {
-
-          });
+          setState(() {});
         },
         backgroundColor: backgroundColor,
         selectedItemColor: redColor,
         unselectedItemColor: whiteColor,
         currentIndex: pageIndex,
-        items:  const [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",

@@ -182,8 +182,8 @@ class _VideoScreenState extends State<VideoScreen> {
                                 ),
                                 Column(
                                   children: [
-                                     InkWell(
-                                       onTap: ()=> Get.to(CommentScreen()),
+                                    InkWell(
+                                      onTap: () => Get.to(CommentScreen()),
                                       child: Icon(
                                         Icons.message,
                                         color: Colors.white,
