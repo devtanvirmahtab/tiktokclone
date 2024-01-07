@@ -14,32 +14,33 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
   final imagePath = "".obs;
+
   User get user => _user.value!;
 
   @override
-  void onReady(){
+  void onReady() {
     super.onReady();
     _user = Rx<User?>(firebaseAuth.currentUser);
     _user.bindStream(firebaseAuth.authStateChanges());
     ever(_user, _setInitialScreen);
   }
 
-  _setInitialScreen(User? user){
-    if(user == null){
-      Get.offAll(()=>LoginScreen());
-    }else{
-      Get.offAll(()=>HomeScreen());
+  _setInitialScreen(User? user) {
+    if (user == null) {
+      Get.offAll(() => LoginScreen());
+    } else {
+      Get.offAll(() => HomeScreen());
     }
   }
 
   //pick image;
   Future<void> pickImage() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(pickedImage != null){
+    final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.gallery);
+    if (pickedImage != null) {
       Get.snackbar("Success", "Picked image Success");
       imagePath.value = pickedImage.path;
     }
-
   }
 
   //upload image to firebase storage
@@ -55,15 +56,16 @@ class AuthController extends GetxController {
   }
 
   //register the user
-  Future<void> registerUser(
-      String username, String email, String password, File? image) async {
+  Future<void> registerUser(String username, String email, String password,
+      File? image) async {
     try {
       if (username.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
           image != null) {
         //save your to fireStore
-        UserCredential credential =  await firebaseAuth.createUserWithEmailAndPassword(
+        UserCredential credential = await firebaseAuth
+            .createUserWithEmailAndPassword(
             email: email, password: password);
         String downloadUrl = await _uploadImageToFirebaseStorage(image);
         logger.w("image upload to firestore $downloadUrl");
@@ -73,8 +75,9 @@ class AuthController extends GetxController {
           profilePhoto: downloadUrl,
           uid: credential.user!.uid,
         );
-        await fireStore.collection("users").doc(credential.user!.uid).set(user.toJson());
-      }else{
+        await fireStore.collection("users").doc(credential.user!.uid).set(
+            user.toJson());
+      } else {
         Get.snackbar("Error", "Please Enter All The Field");
       }
       Get.snackbar("Success", "Account created Successfully ");
@@ -83,16 +86,17 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> loginUser(String email,String password) async {
-    try{
-      if(email.isNotEmpty && password.isNotEmpty){
-        await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  Future<void> loginUser(String email, String password) async {
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
         logger.w("login success");
         Get.offAll(HomeScreen());
-      }else{
+      } else {
         Get.snackbar("Error", "Please Enter all fields");
       }
-    }on FirebaseException catch (e){
+    } on FirebaseException catch (e) {
       logger.w("login Error ${e.toString()}");
       Get.snackbar("Error", e.toString());
     }
