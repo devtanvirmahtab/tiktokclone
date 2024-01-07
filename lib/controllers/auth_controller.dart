@@ -17,6 +17,7 @@ class AuthController extends GetxController {
 
   User get user => _user.value!;
 
+
   @override
   void onReady() {
     super.onReady();
