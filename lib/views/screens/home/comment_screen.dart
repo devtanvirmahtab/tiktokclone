@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tiktokclone/controllers/comment_controller.dart';
 
 class CommentScreen extends StatelessWidget {
-  const CommentScreen({super.key});
+  CommentScreen({super.key});
+
+  final textController = TextEditingController();
+  final commentsController = Get.put(CommentController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class CommentScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return ListTile(
+                    return const ListTile(
                       leading: CircleAvatar(
                         backgroundColor: Colors.black,
                         backgroundImage: NetworkImage('profile photo'),
@@ -27,7 +32,7 @@ class CommentScreen extends StatelessWidget {
                         children: [
                           Text(
                             'userName',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               color: Colors.red,
                               fontWeight: FontWeight.bold,
@@ -35,7 +40,7 @@ class CommentScreen extends StatelessWidget {
                           ),
                           Text(
                             'Comment Description',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               color: Colors.red,
                               fontWeight: FontWeight.w500,
@@ -47,21 +52,21 @@ class CommentScreen extends StatelessWidget {
                         children: [
                           Text(
                             'date',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
                             ),
                           ),
                           Text(
                             'userName',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               color: Colors.red,
                             ),
                           )
                         ],
                       ),
-                      trailing: const Icon(
+                      trailing: Icon(
                         Icons.favorite,
                         color: Colors.red,
                       ),
@@ -72,6 +77,7 @@ class CommentScreen extends StatelessWidget {
               const Divider(),
               ListTile(
                 title: TextFormField(
+                  controller: textController,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -96,7 +102,9 @@ class CommentScreen extends StatelessWidget {
                   ),
                 ),
                 trailing: TextButton(
-                  onPressed: () {},
+                  onPressed: () => commentsController.postComment(
+                    textController.text,
+                  ),
                   child: const Text(
                     'Send',
                     style: TextStyle(
