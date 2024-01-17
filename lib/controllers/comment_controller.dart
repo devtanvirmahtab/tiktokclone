@@ -19,37 +19,37 @@ class CommentController extends GetxController {
   postComment(String commentText) async {
     try {
       if (commentText.isNotEmpty) {
-            DocumentSnapshot userDoc = await fireStore
-                .collection('users')
-                .doc(authController.user.uid)
-                .get();
-            var allDocs = await fireStore
-                .collection('videos')
-                .doc(_postId)
-                .collection('comments')
-                .get();
-            int len = allDocs.docs.length;
-            Comment comment = Comment(
-              userName: (userDoc.data()! as dynamic)['name'],
-              comment: commentText.trim(),
-              datePublished: DateTime.now(),
-              likes: [],
-              profilePhoto: (userDoc.data()! as dynamic)['profilePhoto'],
-              uid: authController.user.uid,
-              id: 'Comment $len',
-            );
+        DocumentSnapshot userDoc = await fireStore
+            .collection('users')
+            .doc(authController.user.uid)
+            .get();
+        var allDocs = await fireStore
+            .collection('videos')
+            .doc(_postId)
+            .collection('comments')
+            .get();
+        int len = allDocs.docs.length;
+        Comment comment = Comment(
+          userName: (userDoc.data()! as dynamic)['name'],
+          comment: commentText.trim(),
+          datePublished: DateTime.now(),
+          likes: [],
+          profilePhoto: (userDoc.data()! as dynamic)['profilePhoto'],
+          uid: authController.user.uid,
+          id: 'Comment $len',
+        );
 
-            await fireStore
-                .collection('videos')
-                .doc(_postId)
-                .collection('comments')
-                .doc('Comment $len')
-                .set(
-                  comment.toJson(),
-                );
-          }
+        await fireStore
+            .collection('videos')
+            .doc(_postId)
+            .collection('comments')
+            .doc('Comment $len')
+            .set(
+              comment.toJson(),
+            );
+      }
     } catch (e) {
-      Get.snackbar('Error while comments',e.toString());
+      Get.snackbar('Error while comments', e.toString());
       logger.e(e.toString());
     }
   }
