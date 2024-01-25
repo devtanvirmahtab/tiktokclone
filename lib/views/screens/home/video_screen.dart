@@ -113,7 +113,7 @@ class _VideoScreenState extends State<VideoScreen> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -165,7 +165,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                       child: Icon(
                                         Icons.favorite,
                                         color: data.likes.contains(
-                                                authController.user.uid)
+                                            authController.user.uid)
                                             ? Colors.red
                                             : Colors.white,
                                       ),
