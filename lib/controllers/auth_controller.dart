@@ -17,7 +17,6 @@ class AuthController extends GetxController {
 
   User get user => _user.value!;
 
-
   @override
   void onReady() {
     super.onReady();
@@ -30,7 +29,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => LoginScreen());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => const HomeScreen());
     }
   }
 
@@ -93,7 +92,7 @@ class AuthController extends GetxController {
         await firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password);
         logger.w("login success");
-        Get.offAll(HomeScreen());
+        Get.offAll(const HomeScreen());
       } else {
         Get.snackbar("Error", "Please Enter all fields");
       }
